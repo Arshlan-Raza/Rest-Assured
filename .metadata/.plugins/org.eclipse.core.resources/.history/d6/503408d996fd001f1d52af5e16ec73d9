@@ -1,0 +1,19 @@
+package day1;
+import org.testng.annotations.*;
+
+import io.restassured.RestAssured.*;
+import io.restassured.matcher.RestAssuredMatchers.*;
+import org.hamcrest.Matchers.*;
+
+public class HttpRequest {
+	
+	@Test
+	void getUser() {
+		given()
+		
+		when() 
+		
+		then()
+	}
+
+}
