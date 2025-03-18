@@ -1,0 +1,63 @@
+package example;
+
+import static io.restassured.RestAssured.baseURI;
+import static io.restassured.RestAssured.given;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONObject;
+
+public class PutPatchDeleteExample {
+	
+public void testPut() {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		JSONObject request = new  JSONObject(map);
+		
+		request.put("name", "Arshlan");
+		request.put("Job", "Teacher");
+		
+		System.out.println(request.toString());
+		
+		baseURI = "https://reqres.in/api";
+		
+		given()
+			.header("Content-Type","application/json")
+			.body(request.toString())
+		
+		.when()
+			.put("/users/2")
+			
+		.then()
+			.statusCode(201).log().all();
+		
+	}
+
+public void testPatch() {
+	
+	Map<String, Object> map = new HashMap<String, Object>();
+	
+	JSONObject request = new  JSONObject(map);
+	
+	request.put("name", "Arshlan");
+	request.put("Job", "Teacher");
+	
+	System.out.println(request.toString());
+	
+	baseURI = "https://reqres.in";
+	
+	given()
+		.header("Content-Type","application/json")
+		.body(request.toString())
+	
+	.when()
+		.patch("/api/users/2")
+		
+	.then()
+		.statusCode(200).log().all();
+	
+}
+
+}

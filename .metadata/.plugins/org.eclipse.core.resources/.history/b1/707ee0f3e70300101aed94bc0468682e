@@ -1,0 +1,57 @@
+package example;
+
+import org.json.JSONObject;
+import org.testng.annotations.Test;
+
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
+import static io.restassured.RestAssured.*;
+
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class TestOnLocalAPI {
+	
+	@Test
+	public void get() {
+		
+		baseURI = "http://localhost:3000";
+		
+		given()
+			.get("/subjects")
+		.then()
+			.statusCode(200)
+			.log().all();
+	}
+
+	@Test
+	public void put() {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		JSONObject request = new JSONObject();
+		
+		request.put("firstName", "Issac");
+		request.put("lastName", "Newton");
+		request.put("subjectId", 1);
+		request.put("is", 4);
+		
+		
+		
+		baseURI = "http://localhost:3000";
+		
+		
+		given()
+			.header("Content-Type","application/json")
+			.body(request.toString())
+			
+		.when()
+			.post("/users")
+			
+		.then()
+			.statusCode(201)
+			.log().all();
+	}
+}
